@@ -67,14 +67,7 @@ def getFiles(directory):
 
 #gets arXiv id from .pdf name
 def fileToId(fname):
-    try:
-        f = fname.strip('arXiv_')
-    except:
-        pass
-    
-    id = f.strip('.pdf')
-
-    return id
+    return fname.strip('arXiv_').strip('.pdf')
 
 
 
