@@ -15,31 +15,31 @@ class MainApp(Frame):
 
     def createWidgets(self):
         #add dir
-        self.imp_button = Button(self.left_frame, text='Add Path', width = 10,  command=self.openDir)
+        self.imp_button = Button(self.top_frame, text='Add Path', width = 10,  command=self.openDir)
         self.imp_button.pack(side=RIGHT)
 
         #update button
-        self.update_button = Button(self.left_frame, text='Update',width = 10,  command=self.update)
+        self.update_button = Button(self.top_frame, text='Update',width = 10,  command=self.update)
         self.update_button.pack(side=RIGHT)
         
-        self.open_button = Button(self.left_frame, text='Open Paper',width = 10,  command=self.openSelected)
+        self.open_button = Button(self.top_frame, text='Open Paper',width = 10,  command=self.openSelected)
         self.open_button.pack(side=RIGHT)
 
-        self.update_button = Button(self.left_frame, text='BibTex',width = 10,  command=self.openBib)
+        self.update_button = Button(self.top_frame, text='BibTex',width = 10,  command=self.openBib)
         self.update_button.pack(side=RIGHT)
         
         #directory list box
-        self.dscrollbar = Scrollbar(self.right_frame)
+        self.dscrollbar = Scrollbar(self.bottom_frame)
         self.dscrollbar.pack(side=LEFT, fill=Y)
-        self.dirbox = Listbox(self.right_frame, height = 14)
+        self.dirbox = Listbox(self.bottom_frame, height = 14)
         self.dirbox.pack(side=LEFT)
         self.dirbox.config(yscrollcommand=self.dscrollbar.set)
         self.dscrollbar.config(command=self.dirbox.yview)
         
         #paper list box
-        self.pscrollbar = Scrollbar(self.right_frame)
+        self.pscrollbar = Scrollbar(self.bottom_frame)
         self.pscrollbar.pack(side=LEFT, fill=Y)
-        self.paperbox = Listbox(self.right_frame, height = 14)
+        self.paperbox = Listbox(self.bottom_frame, height = 14)
         self.paperbox.bind('<<ListboxSelect>>', self.fSelect)
         self.paperbox.pack(side=LEFT)
         self.paperbox.config(yscrollcommand=self.pscrollbar.set)
@@ -49,10 +49,10 @@ class MainApp(Frame):
         #output name list
         self.outstrs = ['Title: ','Year: ','Path: ']
 
-        self.scrollbar = Scrollbar(self.right_frame)
+        self.scrollbar = Scrollbar(self.bottom_frame)
         self.scrollbar.pack(side=RIGHT, fill=Y)
 
-        self.txt = Text(self.right_frame, wrap=WORD, height=14) # wrap=CHAR, wrap=NONE
+        self.txt = Text(self.bottom_frame, wrap=WORD, height=14) # wrap=CHAR, wrap=NONE
         self.txt.pack(expand=1, fill=BOTH)
 
         self.txt.config(yscrollcommand=self.scrollbar.set)
@@ -155,12 +155,12 @@ class MainApp(Frame):
 
     def __init__(self, master=None):    
         Frame.__init__(self, master)
-        self.left_frame = Frame(self)
-        self.right_frame = Frame(self)
+        self.top_frame = Frame(self)
+        self.bottom_frame = Frame(self)
         self.createWidgets()
         self.loadPapers()
-        self.left_frame.pack(side=TOP)
-        self.right_frame.pack(side=BOTTOM)
+        self.top_frame.pack(side=TOP)
+        self.bottom_frame.pack(side=BOTTOM)
         self.pack()
         
         
