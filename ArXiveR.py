@@ -3,12 +3,12 @@ import tkMessageBox
 import tkFileDialog
 from papers import papers
 import subprocess
-
+import config
 
 class MainApp(Frame):
 
     def loadPapers(self):
-        self.papers = papers()
+        self.papers = papers(config.db_loc)
         self.refreshDirs()
         self.refreshPapers()
     
@@ -92,7 +92,7 @@ class MainApp(Frame):
             tkMessageBox.showwarning('Paper Selection', 'Please select a document')
             return
         fdir = self.papers.findEntry(id)['loc']
-        subprocess.call("evince " + fdir, shell=True)
+        subprocess.call(config.viewer +' '+ fdir, shell=True)
     
     #open bibtex info
     #TODO set custom program to open in
@@ -106,7 +106,7 @@ class MainApp(Frame):
         with open("tmp/bib.txt", "w") as ftxt:
             ftxt.write(bib)
         
-        subprocess.call("mousepad " + "tmp/bib.txt", shell=True)
+        subprocess.call(config.editor +' '+ 'tmp/bib.txt', shell=True)
             
     #retrieve and display info for selected paper
     def fSelect(self, evt):
